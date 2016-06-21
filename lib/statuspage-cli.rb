@@ -83,14 +83,14 @@ class StatusPageCLI
       response = @status_page.open_incident(args[1], args[2], args[3])
       puts "Created new incident: #{response['name']}"
     elsif args[0] == 'update'
-      incident_names = incidents_hash.keys.grep(/#{args[0].downcase}/)
+      incident_names = @status_page.incidents_hash.keys.grep(/#{args[1].downcase}/)
       if incident_names.size == 0
-        raise "Cannot find incident matching '#{args[0]}'"
+        raise "Cannot find incident matching '#{args[1]}'"
       elsif incident_names.size == 1
         response = @status_page.update_incident_by_id(@status_page.incidents_hash[incident_names.first], args[2], args[3])
         puts "Updated incident '#{response['name']}' status to #{response['status']}"
       else
-        raise "Multiple incidents matching '#{args[0]}'"
+        raise "Multiple incidents matching '#{args[1]}'"
       end
     else
       raise "Invalid incidents action"
