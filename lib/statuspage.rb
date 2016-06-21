@@ -77,7 +77,7 @@ class StatusPage
   end
 
   def httparty_send(action, url, options={})
-    options.merge!(:headers => { "Authorization" => @oauth })
+    options.merge!(:headers => { "Authorization" => "OAuth #{@oauth}" })
     HTTParty.send(action, url, options)
   end
 end
